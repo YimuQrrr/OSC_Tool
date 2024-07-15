@@ -23,7 +23,7 @@
 
 > /exit          --    Exit
 ```
-
+<h2 align="center"> </h2>
 ```zsh
 > OSC_Tool - TTT ⭐
 ```
