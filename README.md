@@ -40,4 +40,3 @@
 <img src="img/OSC_T.gif" width="2000px"/>
 
 <h2 align="center"> 🧡 END 🧡 </h2>
-<h2 align="center"> </h2>
