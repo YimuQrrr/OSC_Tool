@@ -9,19 +9,19 @@
 ```zsh
 > /help          --  Help
 
-> /midi s       --  Scan MIDI devices
-> /midi c       --  Connect first MIDI
-> /midi c [ ]   --  Custom MIDI connection
-> /midi d       --  Disconnect MIDI device
+> /midi s        --  Scan MIDI devices
+> /midi c        --  Connect first MIDI
+> /midi c [ ]    --  Custom MIDI connection
+> /midi d        --  Disconnect MIDI device
 
-> /osc s        --  Start OSC scan server
-> /osc d        --  Shutdown OSC server
+> /osc s         --  Start OSC scan server
+> /osc d         --  Shutdown OSC server
 > /osc t         --  OSC address test
 
-> /open vrc  -- Open VRChat
+> /open vrc      --  Open VRChat
 > /kill vrc      --  Taskkill VRChat
 
-> /exit          --    Exit
+> /exit          --  Exit
 ```
 
 <h2 align="center"> </h2>
