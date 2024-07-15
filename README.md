@@ -39,6 +39,4 @@
 ```
 <img src="img/OSC_T.gif" width="2000px"/>
 
-```zsh
-> 🧡 END 🧡
-```
+<h2 align="center"> 🧡 END 🧡 </h2>
