@@ -38,3 +38,7 @@
 > OSC_Tool - OSC Output Test ⭐
 ```
 <img src="img/OSC_T.gif" width="2000px"/>
+
+```zsh
+> 🧡 END 🧡
+```
