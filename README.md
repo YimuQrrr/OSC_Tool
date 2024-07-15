@@ -1,3 +1,12 @@
+<style>
+.zsh-block {
+  border-radius: 15px;
+  background-color: #f5f5f5; /* optional, to make the background stand out */
+  padding: 10px;
+  display: inline-block;
+}
+</style>
+
 <h2 align="center"> ✨ OSC_Tool ✨ </h2>
 
 ```zsh
@@ -5,7 +14,7 @@
 ```
 
 <img align="left" src="img/OSC_X.gif" width="255px"/>
-
+<div class="zsh-block">
 ```zsh
 > /help          --  Help
 
@@ -23,7 +32,7 @@
 
 > /exit          --    Exit
 ```
-
+</div>
 ```zsh
 > TTT ⭐
 ```
