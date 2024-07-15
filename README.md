@@ -27,4 +27,4 @@
 ```zsh
 > TTT ⭐
 ```
-<img src="img/OSC_O.gif" width="1010px"/>
+<img src="img/OSC_O.gif" width="1100px"/>
