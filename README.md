@@ -28,15 +28,19 @@
 > OSC_Tool - TTT ⭐
 ```
 <img src="img/OSC_O.gif" width="2000px"/>
+<h2 align="center"> </h2>
 
 ```zsh
 > OSC_Tool - OSC Search ⭐
 ```
 <img src="img/OSC_S.gif" width="2000px"/>
+<h2 align="center"> </h2>
 
 ```zsh
 > OSC_Tool - OSC Output Test ⭐
 ```
 <img src="img/OSC_T.gif" width="2000px"/>
+<h2 align="center"> </h2>
+
 
 <h2 align="center"> 🧡 END 🧡 </h2>
