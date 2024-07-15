@@ -23,3 +23,7 @@
 
 > /exit          --    Exit
 ```
+
+```zsh
+> A compact OSC tool suitable for VRChat ⭐
+```
