@@ -44,5 +44,10 @@
 <img src="img/OSC_T.gif" width="2000px"/>
 <h2 align="center"> </h2>
 
+```zsh
+> OSC_Tool - OSC MIDI ⭐
+```
+<img src="img/MIDI.gif" width="2000px"/>
+<h2 align="center"> </h2>
 
 <h2 align="center"> 🧡 END 🧡 </h2>
