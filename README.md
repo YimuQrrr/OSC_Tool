@@ -4,7 +4,7 @@
 > A compact OSC tool suitable for VRChat ⭐
 ```
 
-<img align="left" src="img/OSC_X.gif" width="250px"/>
+<img align="left" src="img/OSC_X.gif" width="255px"/>
 
 ```zsh
 > /help          --  Help
