@@ -25,5 +25,6 @@
 ```
 
 ```zsh
-> A compact OSC tool suitable for VRChat ⭐
+> TTT ⭐
 ```
+<img src="img/OSC_O.gif" width="600px"/>
