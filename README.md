@@ -1,16 +1,16 @@
 <h2 align="center"> ✨ OSC_Tool ✨ </h2>
 
 ```zsh
+> A compact OSC tool suitable for VRChat ⭐
+```
+
+```zsh
    ___  __    ___   _____            _ 
   /___\/ _\  / __\ /__   \___   ___ | |
  //  //\ \  / /      / /\/ _ \ / _ \| |
 / \_// _\ \/ /___   / / | (_) | (_) | |
 \___/  \__/\____/   \/   \___/ \___/|_|
                                        
-```
-
-```zsh
-> A compact OSC tool suitable for VRChat ⭐
 ```
 
 <img align="left" src="img/OSC_X.gif" width="255px"/>
