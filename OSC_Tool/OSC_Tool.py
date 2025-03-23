@@ -92,8 +92,8 @@ class App(customtkinter.CTk):
         super().__init__(*args, **kwargs)
         self.iconbitmap(os.path.join(os.path.dirname(__file__), "app.ico"))
         self.title("OSC_Tool")
-        self.geometry(f"{255}x{180}")
-        self.minsize(255, 180)
+        self.geometry(f"{256}x{180}")
+        self.minsize(256, 180)
         self.grid_columnconfigure(1, weight=1)
         self.grid_rowconfigure(0, weight=1)
         self.attributes("-topmost", True)
@@ -105,10 +105,15 @@ class App(customtkinter.CTk):
         self.log_message("v1.05 - by - YimuQr", level="info")       ##################################################################################################
 
         self.midi_get = None
+        self.midi_device = None
         self.osc_dispatcher = None
         self.osc_server_thread = None
         self.server_running = False
         self.dc_webhook_TG = False
+        self.now_title = None
+
+        self.static_title = "OSC_Tool"
+
 
 
     # log GUI
@@ -143,10 +148,11 @@ class App(customtkinter.CTk):
 
 
     # 启动 OSC 扫描
-    def start_osc_server(self):
+    def start_osc_server(self, osc_port):
+            osc_port = int(osc_port)
             osc_dispatcher = dispatcher.Dispatcher()
             osc_dispatcher.map('*', self.handle_osc_signal)
-            osc_server_thread = osc_server.ThreadingOSCUDPServer(('127.0.0.1', 9001), osc_dispatcher)
+            osc_server_thread = osc_server.ThreadingOSCUDPServer(('127.0.0.1', osc_port), osc_dispatcher)
             self.osc_server_thread = osc_server_thread
             server_thread = threading.Thread(target=osc_server_thread.serve_forever)
             server_thread.start()
@@ -188,11 +194,15 @@ class App(customtkinter.CTk):
         osc_client.send_message(address, True)
 
 
+
     # MIDI (如果琴键松开)
     def send_midi_osc_off(self, note):
         osc_client = udp_client.SimpleUDPClient("127.0.0.1", 9000)
         address = f"/avatar/parameters/piano/key{note}"
         osc_client.send_message(address, False)
+
+
+
 
 
     # MIDI (其他控件[所有其他控件的value])
@@ -201,6 +211,7 @@ class App(customtkinter.CTk):
         address = f"/avatar/parameters/ys"
         osc_value = value / 10
         osc_client.send_message(address, osc_value)
+
 
 
     # MIDI 琴键 Debug
@@ -219,14 +230,12 @@ class App(customtkinter.CTk):
             if self.midi_device is None:
                 break
             for msg in self.midi_device.iter_pending():
+                print(msg)
                 if msg.type == "note_off":
-                    print(f"{self.get_note_address(msg.note)}: 0")
                     self.send_midi_osc_off(msg.note)
                 elif msg.type == "note_on":
-                    print(f"{self.get_note_address(msg.note)}: 1")
                     self.send_midi_osc_on(msg.note)
                 elif msg.type == "control_change":
-                    print(f"{self.get_control_address(msg.value)}")
                     self.send_midi_control_osc(msg.value)
             time.sleep(0.005)
 
@@ -244,13 +253,14 @@ class App(customtkinter.CTk):
     def connect_to_midi_device(self, midi_device_name):
         self.midi_device = mido.open_input(midi_device_name)
         self.log_message(f"MIDI - connected !", level="midi")
+        #self.geometry(f"{400}x{500}")
         threading.Thread(target=self.process_messages).start()
         threading.Thread(target=self.midi_icon).start()
 
 
     #Discord Webhook test 
     def dc_webhook_message_send(self,chat_message):
-        webhook_url = "https://discord.com/api/webhooks/1194649007641858048/OUfWDluk93KE-9e3NHQbDk01o9t0eWjVuG5tiuTsgPgpJ14Wncets2fV4Y8-NSFMjG2g"
+        webhook_url = "https://discord.com/api/webhooks/0"
         message = chat_message
         payload = {
             "content": message,
@@ -272,7 +282,7 @@ class App(customtkinter.CTk):
         mido.get_input_names()
         self.midi_get = mido.get_input_names()
         if self.midi_get:
-            self.log_message(self.midi_get, level="midi")
+            self.log_message(f"Found {self.midi_get}", level="midi")
         else:
             self.log_message("None - MIDI - device !", level="midi")
 
@@ -281,14 +291,16 @@ class App(customtkinter.CTk):
     # HELP
     def osc_tool_help(self):
         help_tx = """
+
 > /help          --  Help
 
 > /midi s       --  Scan MIDI devices
 > /midi c       --  Connect first MIDI
-> /midi c [ ]   --  Custom MIDI connection
+> /midi c [  ]  --  Custom MIDI connection
 > /midi d       --  Disconnect MIDI device
 
-> /osc s        --  Start OSC scan server
+> /osc s        --  Scan port 9001 OSC
+> /osc s [  ]   --  Custom OSC port scan
 > /osc d        --  Shutdown OSC server
 > /osc t         --  OSC address test
 
@@ -298,7 +310,7 @@ class App(customtkinter.CTk):
 > /exit          --    Exit
 """
         self.log_message(help_tx, level="help")
-        self.geometry(f"{270}x{325}")
+        self.geometry(f"{270}x{345}")
 
 
     # 输入检测
@@ -308,17 +320,17 @@ class App(customtkinter.CTk):
             if chat_message == "/exit":
                 self.ost_exit()
 
-            elif chat_message =="/midi c":
-                input_names = mido.get_input_names()
-                if input_names:
-                    midi_device_name = input_names[0]
-                    self.connect_to_midi_device(midi_device_name)
+            elif chat_message.startswith("/midi c"):
+                if len(chat_message) > 8:   #检查长度
+                    midi_device_name = chat_message[8:]     #获取设备名称
+                    self.connect_to_midi_device(midi_device_name)   #连接到输入的设备
                 else:
-                    self.log_message("None - MIDI - device !", level="midi")
-
-            elif chat_message.startswith("/midi c "):
-                midi_device_name = chat_message[8:]
-                self.connect_to_midi_device(midi_device_name)
+                    input_names = mido.get_input_names()    #获取查询到的设备名称
+                    if input_names:
+                        midi_device_name = input_names[0]
+                        self.connect_to_midi_device(midi_device_name)   #连接到获取到的第一个设备
+                    else:
+                        self.log_message("None - MIDI - device !", level="midi")
 
             elif chat_message == "/midi s":
                 self.scan_midi()
@@ -329,8 +341,12 @@ class App(customtkinter.CTk):
             elif chat_message == "/midi d":
                 self.disconnect_midi_device()
 
-            elif chat_message == "/osc s":
-                self.start_osc_server()
+            elif chat_message.startswith("/osc s"):
+                if len(chat_message) > 7:   #检查长度
+                    osc_port = chat_message[7:]  # 获取端口号
+                else:
+                    osc_port = '9001'   #默认端口
+                self.start_osc_server(osc_port)
 
             elif chat_message == "/osc d":
                 self.shutdown_osc_server()
@@ -356,46 +372,47 @@ class App(customtkinter.CTk):
                 self.log_message("Webhook - log - OFF !", level="info")
 
             else:
-                self.dc_webhook_message_send_start(chat_message)
+                #self.dc_webhook_message_send_start(chat_message)
                 self.send_osc_message(chat_message)
                 self.log_message(chat_message, level="send")
 
             self.entry_message_box.delete(0, customtkinter.END)
 
 
+
     # 标题栏状态显示
     def midi_icon(self):
         while True:
             if self.midi_device is None:
-                self.title("OSC_Tool")
+                self.title(f"{self.static_title}")
                 break
             else:
-                self.title("OSC_Tool  -  🎹")
-                time.sleep(1.0)
-                self.title("OSC_Tool  -  🎵")
-                time.sleep(1.0)
+                self.title(f"{self.static_title}  - 🎹")
+                time.sleep(2.0)
+
 
     # 标题栏状态显示
     def osc_server_icon(self):
         while True:
             if self.osc_server_thread is None:
-                self.title("OSC_Tool")
+                self.title(f"{self.static_title}")
                 break
             else:
-                self.title("OSC_Tool  -  📡")
-                time.sleep(1.0)
-                self.title("OSC_Tool  -  🔗")
-                time.sleep(1.0)
+                self.title(f"{self.static_title}  - 📡")
+                time.sleep(2.0)
+
 
     # 标题栏状态显示
     def msg_icon(self):
-        self.title("OSC_Tool  -✉️")
-        time.sleep(0.3)
-        self.title("OSC_Tool  - ✉️")
-        time.sleep(0.3)
-        self.title("OSC_Tool  -  ✉️")
-        time.sleep(0.3)
-        self.title("OSC_Tool")
+        self.now_title = self.title()
+        self.title(f"{self.static_title} -✉️")
+        time.sleep(0.2)
+        self.title(f"{self.static_title} -  ✉️")
+        time.sleep(0.2)
+        self.title(f"{self.static_title} -    ✉️")
+        time.sleep(0.2)
+        self.title(f"{self.now_title}")
+
 
 
     # 关闭进程VRCHat
