@@ -102,7 +102,7 @@ class App(customtkinter.CTk):
         self.create_textbox_message_log()
         self.create_entry_message_box()
 
-        self.log_message("v1.05 - by - YimuQr", level="info")       ##################################################################################################
+        self.log_message("v1.12 - by - YimuQr", level="info")       ##################################################################################################
 
         self.midi_get = None
         self.midi_device = None
