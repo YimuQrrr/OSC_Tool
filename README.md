@@ -56,14 +56,14 @@
 
 <h2 align="center"> </h2>
 
-`/avatar/parameters/piano/key_s` OSC_MIDI 的地址 `s` 为note为地址,  琴键按下为`True` 抬起为`False`
+🔗`/avatar/parameters/piano/key_s` OSC_MIDI 的地址 `s` 为note为地址,  琴键按下为`True` 抬起为`False`
 
 
-`/avatar/parameters/Message_Box` When sending a message via TTT, this parameter will be sent as `True` for 0.5 seconds, which can be used as animation and sound effects when sending a message.
+🔗`/avatar/parameters/Message_Box` When sending a message via TTT, this parameter will be sent as `True` for 0.5 seconds, which can be used as animation and sound effects when sending a message.
 
-`/avatar/parameters/key/P_1`, `/avatar/parameters/key/P_2`, `/avatar/parameters/key/P_3` 密钥发送的地址 可以用作公开头像的加密措施
+🔗`/avatar/parameters/key/P_1`, `/avatar/parameters/key/P_2`, `/avatar/parameters/key/P_3` The address where the key is sent can be used as an encryption measure for public avatars.
 
-`C:\Users\You\AppData\LocalLow\VRChat\VRChat` 密钥所在的目录
+🔗`C:\Users\You\AppData\LocalLow\VRChat\VRChat` Key Directory.
 
 
 
