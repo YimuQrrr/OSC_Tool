@@ -55,5 +55,5 @@
 ```
 
 <h2 align="center"> </h2>
-``/avatar/parameters/Message_Box`` When sending a message via TTT, this parameter will be sent as true for 0.5 seconds, which can be used as animation and sound effects when sending a message.
+`/avatar/parameters/Message_Box` When sending a message via TTT, this parameter will be sent as true for 0.5 seconds, which can be used as animation and sound effects when sending a message.
 <h2 align="center"> 🧡 END 🧡 </h2>
