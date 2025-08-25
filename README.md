@@ -56,8 +56,7 @@
 
 <h2 align="center"> </h2>
 
-🔗`/avatar/parameters/piano/key_s` OSC_MIDI 的地址 `s` 为note为地址,  琴键按下为`True` 抬起为`False`
-
+🔗`/avatar/parameters/piano/key_s` The address `s` of OSC_MIDI is the note address, and the key is pressed to `True` and released to `False`.
 
 🔗`/avatar/parameters/Message_Box` When sending a message via TTT, this parameter will be sent as `True` for 0.5 seconds, which can be used as animation and sound effects when sending a message.
 
