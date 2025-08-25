@@ -47,7 +47,7 @@
 ```zsh
 > OSC_Tool - VRChat LOG ⭐
 ```
-<img src="img/LOG.gif" width="2000px"/>
+<img src="img/OSC_LOG.gif" width="2000px"/>
 <h2 align="center"> </h2>
 
 ```zsh
