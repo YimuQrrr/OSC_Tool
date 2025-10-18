@@ -338,7 +338,7 @@ class App(customtkinter.CTk):
 
 
 
-    # ========== 加载或创建 env ==========
+    # 加载创建 env
     def load_keys_from_env(self):
         user_profile = os.getenv("USERPROFILE")
         if not user_profile:
@@ -347,7 +347,7 @@ class App(customtkinter.CTk):
 
         env_dir = os.path.join(user_profile, "AppData", "LocalLow", "VRChat", "VRChat")
         if not os.path.exists(env_dir):
-            os.makedirs(env_dir)  # 如果目录不存在就创建
+            os.makedirs(env_dir)
 
         env_path = os.path.join(env_dir, "keys.env")
 
@@ -375,7 +375,6 @@ class App(customtkinter.CTk):
         self.key_P_2 = int(keys.get("KEY_P_2", 255))
         self.key_P_3 = int(keys.get("KEY_P_3", 255))
 
-        # ✅ 加载完成后提示
         self.log_message("Keys loaded !", level="info")
 
     # 发送 osc_lock 密钥
